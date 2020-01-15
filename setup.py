@@ -23,7 +23,7 @@ setup(
     author="Robert Sharp",
     author_email="webmaster@sharpdesigndigital.com",
     requires=["Cython"],
-    version="1.3.0",
+    version="1.3.1",
     description="Distribution Stats & Timer for Testing Non-deterministic Value Generators",
     long_description=long_description,
     long_description_content_type="text/markdown",

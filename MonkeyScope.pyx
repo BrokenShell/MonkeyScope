@@ -12,14 +12,14 @@ __all__ = ("timer", "distribution", "distribution_timer")
 def timer(func: staticmethod, *args, cycles=256, **kwargs):
     results = []
     for i in range(cycles):
-        start = time.time()
+        start = time.time_ns()
         for _ in range(cycles):
             _ = func(*args, **kwargs)
-        end = time.time()
+        end = time.time_ns()
         t_time = end - start
         results.append(t_time / cycles)
-    n = stdev(results) * 1e+9 / 2
-    m = min(results) * 1e+9 + n
+    n = stdev(results) / 2
+    m = min(results) + n
     print(f"Typical Timing: {int(math.ceil(m))} ± {int(math.ceil(n))} ns")
 
 

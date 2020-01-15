@@ -1,5 +1,5 @@
 # MonkeyScope
-Distribution Timer for Non-deterministic Value Generators
+Distribution Test & Performance Timer for Non-deterministic Functions
 
 ### Sister Projects:
 - Fortuna: Collection of abstractions to make custom random generators. https://pypi.org/project/Fortuna/
@@ -98,6 +98,10 @@ Distribution of 100000 samples:
 
 
 ### Development Log:
+
+##### MonkeyScope 1.3.1
+- Documentation Update
+- Nano second precision enabled with time_ns
 
 ##### MonkeyScope 1.3.0
 - No longer requires numpy
