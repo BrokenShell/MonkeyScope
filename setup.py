@@ -13,7 +13,6 @@ setup(
             name="MonkeyScope",
             sources=["MonkeyScope.pyx"],
             language=["c++"],
-            extra_compile_args=["-std=gnu++17"],
         ),
         compiler_directives={
             'embedsignature': True,
@@ -23,8 +22,8 @@ setup(
     author="Robert Sharp",
     author_email="webmaster@sharpdesigndigital.com",
     requires=["Cython"],
-    version="1.3.1",
-    description="Distribution Stats & Timer for Testing Non-deterministic Value Generators",
+    version="1.3.2",
+    description="Distributions & Timer for Non-deterministic Value Generators",
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="Free for non-commercial use",
@@ -38,7 +37,8 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords=[
-        "MonkeyScope", "distribution tests", "function timer", "performance testing", "statistical analysis",
+        "MonkeyScope", "distribution tests", "function timer",
+        "performance testing", "statistical analysis",
     ],
     python_requires='>=3.7',
 )
