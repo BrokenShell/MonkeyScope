@@ -11,9 +11,9 @@ Distribution Test & Performance Timer for Non-deterministic Functions
 
 
 ### Installation may require the following:
-- Python 3.6 or later with dev tools (setuptools, pip, etc.)
+- Python 3.7 or later with dev tools (setuptools, pip, etc.)
 - Cython: Bridge from C/C++ to Python.
-- Modern C++17 compiler and Standard Library. Clang or GCC.
+- Modern C++ compiler and Standard Library. Clang or GCC.
 
 ---
 
@@ -98,6 +98,12 @@ Distribution of 100000 samples:
 
 
 ### Development Log:
+
+##### MonkeyScope 1.3.3
+- Documentation Update
+
+##### MonkeyScope 1.3.2
+- MonkeyScope no longer requires C++17 compiler. Any C++ compiler should work.
 
 ##### MonkeyScope 1.3.1
 - Documentation Update
