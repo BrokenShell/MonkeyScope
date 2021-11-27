@@ -2,6 +2,8 @@
 #distutils: language = c++
 
 import time
+from typing import Callable, Optional
+
 import math
 from statistics import median_low, median_high, stdev, mean
 
@@ -9,7 +11,7 @@ from statistics import median_low, median_high, stdev, mean
 __all__ = ("timer", "distribution", "distribution_timer")
 
 
-def timer(func: staticmethod, *args, cycles=256, **kwargs):
+def timer(func: Callable, *args, cycles: int = 256, **kwargs):
     results = []
     for i in range(cycles):
         for _ in range(100):
@@ -25,7 +27,11 @@ def timer(func: staticmethod, *args, cycles=256, **kwargs):
     print(f"Typical Timing: {int(math.ceil(m))} ± {int(math.ceil(n))} ns")
 
 
-def distribution(func: staticmethod, *args, num_cycles=1000000, post_processor: staticmethod = None, **kwargs):
+def distribution(func: Callable,
+                 *args,
+                 num_cycles: int = 1000000,
+                 post_processor: Optional[Callable] = None,
+                 **kwargs):
     results = [func(*args, **kwargs) for _ in range(num_cycles)]
     if isinstance(results[0], list):
         for i, _ in enumerate(results):
@@ -54,19 +60,26 @@ def distribution(func: staticmethod, *args, num_cycles=1000000, post_processor: 
     else:
         processed_results = list(map(post_processor, results))
         unique_results = list(set(processed_results))
-        print(f"Post-processor distribution of {num_cycles} samples using {post_processor.__name__} method:")
+        print(f"{post_processor.__name__} distribution of {num_cycles}:")
     try:
         unique_results.sort()
     except TypeError:
         pass
     result_obj = {
-        key: f"{processed_results.count(key) / (num_cycles / 100)}%" for key in unique_results
+        key: f"{processed_results.count(key) / (num_cycles / 100)}%"
+        for key in unique_results
     }
     for key, val in result_obj.items():
         print(f" {key}: {val}")
 
 
-def distribution_timer(func: staticmethod, *args, num_cycles=100000, label="", post_processor=None, **kwargs):
+def distribution_timer(func: Callable,
+                       *args,
+                       num_cycles: int = 100000,
+                       label: str = "",
+                       post_processor: Optional[Callable] = None,
+                       **kwargs):
+
     def quote_str(value):
         return f'"{value}"' if isinstance(value, str) else str(value)
 
@@ -80,5 +93,6 @@ def distribution_timer(func: staticmethod, *args, num_cycles=100000, label="", p
     else:
         print(f"Output Analysis: {func}({arguments})")
     timer(func, *args, **kwargs)
-    distribution(func, *args, num_cycles=num_cycles, post_processor=post_processor, **kwargs)
+    distribution(func, *args,
+                 num_cycles=num_cycles, post_processor=post_processor, **kwargs)
     print("")
