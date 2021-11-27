@@ -12,10 +12,12 @@ __all__ = ("timer", "distribution", "distribution_timer")
 def timer(func: staticmethod, *args, cycles=256, **kwargs):
     results = []
     for i in range(cycles):
-        start = time.time_ns()
+        for _ in range(100):
+            _ = func(*args, **kwargs)
+        start = time.perf_counter_ns()
         for _ in range(cycles):
             _ = func(*args, **kwargs)
-        end = time.time_ns()
+        end = time.perf_counter_ns()
         t_time = end - start
         results.append(t_time / cycles)
     n = stdev(results) / 2
@@ -25,7 +27,7 @@ def timer(func: staticmethod, *args, cycles=256, **kwargs):
 
 def distribution(func: staticmethod, *args, num_cycles=1000000, post_processor: staticmethod = None, **kwargs):
     results = [func(*args, **kwargs) for _ in range(num_cycles)]
-    if type(results[0]) is list:
+    if isinstance(results[0], list):
         for i, _ in enumerate(results):
             results[i] = results[i][0]
     try:
@@ -66,7 +68,7 @@ def distribution(func: staticmethod, *args, num_cycles=1000000, post_processor: 
 
 def distribution_timer(func: staticmethod, *args, num_cycles=100000, label="", post_processor=None, **kwargs):
     def quote_str(value):
-        return f'"{value}"' if type(value) is str else str(value)
+        return f'"{value}"' if isinstance(value, str) else str(value)
 
     arguments = ', '.join([quote_str(v) for v in args] + [f'{k}={quote_str(v)}' for k, v in kwargs.items()])
     if label:

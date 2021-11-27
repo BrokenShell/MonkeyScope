@@ -21,7 +21,7 @@ setup(
     ),
     author="Robert Sharp",
     author_email="webmaster@sharpdesigndigital.com",
-    version="1.3.4",
+    version="1.4.1",
     description="Distributions & Timer for Non-deterministic Value Generators",
     long_description=long_description,
     long_description_content_type="text/markdown",
