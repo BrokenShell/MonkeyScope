@@ -1,10 +1,8 @@
 #!python3
 #distutils: language = c++
-
 import time
-from typing import Callable, Optional
-
 import math
+from typing import Callable
 from statistics import median_low, median_high, stdev, mean
 
 
@@ -30,7 +28,7 @@ def timer(func: Callable, *args, cycles: int = 256, **kwargs):
 def distribution(func: Callable,
                  *args,
                  num_cycles: int = 1000000,
-                 post_processor: Optional[Callable] = None,
+                 post_processor: Callable = None,
                  **kwargs):
     results = [func(*args, **kwargs) for _ in range(num_cycles)]
     if isinstance(results[0], list):
@@ -77,7 +75,7 @@ def distribution_timer(func: Callable,
                        *args,
                        num_cycles: int = 100000,
                        label: str = "",
-                       post_processor: Optional[Callable] = None,
+                       post_processor: Callable = None,
                        **kwargs):
 
     def quote_str(value):

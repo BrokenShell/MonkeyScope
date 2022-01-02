@@ -98,9 +98,11 @@ Distribution of 100000 samples:
 
 
 ### Development Log:
+##### MonkeyScope 1.4.3
+- Updates calling signature of `distribution` and `distribution_timer`
 
 ##### MonkeyScope 1.3.4
-- adds toml file to aid installation
+- Adds toml file to aid installation
 
 ##### MonkeyScope 1.3.3
 - Documentation Update
