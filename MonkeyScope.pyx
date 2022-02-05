@@ -29,28 +29,32 @@ def distribution(func: Callable,
                  *args,
                  num_cycles: int = 1000000,
                  post_processor: Callable = None,
+                 stats: bool = True,
                  **kwargs):
     results = [func(*args, **kwargs) for _ in range(num_cycles)]
     if isinstance(results[0], list):
         for i, _ in enumerate(results):
             results[i] = results[i][0]
-    try:
-        stat_samples = results[:1000]
-        if isinstance(stat_samples[0], str):
-            stat_samples = list(map(float, stat_samples))
-        med_lo, med_hi = median_low(stat_samples), median_high(stat_samples)
-        med = med_lo if med_lo == med_hi else (med_lo, med_hi)
-        output = (
-            f" Minimum: {min(stat_samples)}",
-            f" Median: {med}",
-            f" Maximum: {max(stat_samples)}",
-            f" Mean: {mean(stat_samples)}",
-            f" Std Deviation: {stdev(stat_samples)}",
-        )
-        print(f"Statistics of {len(stat_samples)} samples:")
-        print("\n".join(output))
-    except ValueError:
-        pass
+    if stats:
+        try:
+            stat_samples = results[:1000]
+            if isinstance(stat_samples[0], str):
+                stat_samples = list(map(float, stat_samples))
+            med_lo, med_hi = median_low(stat_samples), median_high(stat_samples)
+            med = med_lo if med_lo == med_hi else (med_lo, med_hi)
+            output = (
+                f" Minimum: {min(stat_samples)}",
+                f" Median: {med}",
+                f" Maximum: {max(stat_samples)}",
+                f" Mean: {mean(stat_samples)}",
+                f" Std Deviation: {stdev(stat_samples)}",
+            )
+            print(f"Statistics of {len(stat_samples)} samples:")
+            print("\n".join(output))
+        except ValueError:
+            pass
+        except TypeError:
+            pass
     if post_processor is None:
         processed_results = results
         print(f"Distribution of {num_cycles} samples:")
@@ -76,6 +80,7 @@ def distribution_timer(func: Callable,
                        num_cycles: int = 100000,
                        label: str = "",
                        post_processor: Callable = None,
+                       stats: bool = True,
                        **kwargs):
 
     def quote_str(value):
@@ -91,6 +96,12 @@ def distribution_timer(func: Callable,
     else:
         print(f"Output Analysis: {func}({arguments})")
     timer(func, *args, **kwargs)
-    distribution(func, *args,
-                 num_cycles=num_cycles, post_processor=post_processor, **kwargs)
+    distribution(
+        func,
+        *args,
+        num_cycles=num_cycles,
+        post_processor=post_processor,
+        stats=stats,
+        **kwargs,
+    )
     print("")
