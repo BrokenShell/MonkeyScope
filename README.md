@@ -1,10 +1,8 @@
 # MonkeyScope
-Distribution Test & Performance Timer for Non-deterministic Functions
+Distribution Tests & Performance Timer for Non-deterministic Functions
 
-### Sister Projects:
+### Sister Project:
 - Fortuna: Collection of abstractions to make custom random generators. https://pypi.org/project/Fortuna/
-- Pyewacket: Drop-in replacement for the Python3 random module. https://pypi.org/project/Pyewacket/
-- RNG: Python3 API for the C++ Random Library. https://pypi.org/project/RNG/
 
 
 ### Quick Install `$ pip install MonkeyScope`
@@ -98,6 +96,9 @@ Distribution of 100000 samples:
 
 
 ### Development Log:
+##### MonkeyScope 1.4.4
+- Resolves bug caused by attempting to generate a distribution of non-numeric values.
+
 ##### MonkeyScope 1.4.3
 - Updates calling signature of `distribution` and `distribution_timer`
 
