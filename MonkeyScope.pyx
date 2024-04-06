@@ -27,7 +27,7 @@ def timer(func: Callable, *args, cycles: int = 256, **kwargs):
 
 def distribution(func: Callable,
                  *args,
-                 num_cycles: int = 1000000,
+                 num_cycles: int = 100000,
                  post_processor: Callable = None,
                  stats: bool = True,
                  **kwargs):
@@ -77,7 +77,7 @@ def distribution(func: Callable,
 
 def distribution_timer(func: Callable,
                        *args,
-                       num_cycles: int = 100000,
+                       num_cycles: int = 10000,
                        label: str = "",
                        post_processor: Callable = None,
                        stats: bool = True,
